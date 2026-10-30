@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
-export default function Login(){
-
+export default function Login({setValue}){
+    const navigate = useNavigate();
     const [userName, setUserName] = useState("");
     const [passowrd, setPassword] = useState("");
     const [show, setShow] = useState("");
 
     const [userNotExist, setUserNotExist] = useState(false);
     
-    const handleLogin=()=>{
+    const handleLogin=async ()=>{
         if(localStorage.getItem("users")==null){
             setShow("User Not Registered");
         } else{
@@ -25,10 +25,18 @@ export default function Login(){
                     if(userss[i].username == userName){
                         if(userss[i].password== passowrd){
                             setShow("Login Sucessfull")
-                            localStorage.setItem('isLoggedIn', JSON.stringify(true))
+
+                            // pehle local storage mein alag se put then useState wale fn mein set
+                            localStorage.setItem('isLoggedIn', JSON.stringify({"fullname":userss[i].fullname, "username":userss[i].username, "password":userss[i].password}))
+                            setValue(JSON.parse(localStorage.getItem("isLoggedIn")));
+                            setPassword("")
+                            setUserName("")
                             checkPass = true;
                             checkUser = true;
                             setUserNotExist(false);
+                            
+                            await new Promise((res)=>setTimeout(res, 2000))
+                            navigate("/")
                         }else{
                             setShow("Incorrect Password")
                             setUserNotExist(false);

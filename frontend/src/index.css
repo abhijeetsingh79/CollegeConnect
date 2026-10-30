@@ -93,6 +93,26 @@ background-color: var(--border-color);
     border-radius: 6px;
 }
 
+.navbar-logout-log{
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.navbar-logout-log:hover {
+    background-color: #1d4ed8;
+}
+
+.nnavbar-logout-log:active {
+    transform: scale(0.97);
+}
+
 /* Smoothly change the whole page */
 body,
 .navbar-conatiner,
@@ -107,6 +127,7 @@ button {
         color 0.4s ease,
         border-color 0.4s ease;
 }
+
 
 /* Mobile */
 @media (max-width: 600px) {

@@ -1,19 +1,18 @@
 import { Link } from "react-router";
 import ThemeToggle from "./ThemeToogle";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-export default function Navbar(){
-    if(localStorage.getItem('isRegistered')==null){
-        localStorage.setItem('isRegistered', false);
-    }
-    if(localStorage.getItem('isLoggedIn')==null){
-        localStorage.setItem('isLoggedIn', false);
-    }
+
+
+export default function Navbar({value, setValue}){
     
-    const [Login, setLogin] = useState(localStorage.getItem('isLoggedIn'));
-    const [Registered, setRegistered] = useState(localStorage.getItem('isRegistered'));
-    const [name, setName] = useState("false");
-
+    let name = false;
+    
+    if(!value){
+        name = false;
+    } else{
+        name = value.fullname;
+    }
 
     return(
         <div className="navbar-conatiner">
@@ -23,15 +22,16 @@ export default function Navbar(){
             <Link to={"/Student"}>Student</Link>
             <Link to={"/Events"}>Events</Link>
             {
-                Login=="false"? <Link to={"/Login"}>Login</Link>:null
+                 value==false? <Link to={"/Login"}>Login</Link>:null
             }
+            <Link to={"/Register"}>Register</Link>
             
             {
-                name=="true"? <div>Hi, {name}</div>:null 
+                name!=false? <div>Hi, {name}</div>:null 
             }
 
             {
-                Registered=="false"? <Link to={"/Register"}>Register</Link>: null
+                value!=false? <button onClick={()=>{localStorage.setItem("isLoggedIn", JSON.stringify(false)); setValue(JSON.parse(localStorage.getItem("isLoggedIn")))}} className="navbar-logout-log">Logout</button>:null
             }
             
             <ThemeToggle/>
