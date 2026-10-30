@@ -11,7 +11,8 @@ export default function Login({setValue}){
     
     const handleLogin=async ()=>{
         if(localStorage.getItem("users")==null){
-            setShow("");
+            setShow("User Not Registered");
+            setUserNotExist(true)
         } else{
             let userss = JSON.parse(localStorage.getItem("users"))
 
