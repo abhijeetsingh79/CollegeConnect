@@ -131,7 +131,7 @@ export default function Register(){
                 localStorage.setItem("users",JSON.stringify([]))
             }
 
-            let userss = JSON.parse(localStorage.getItem("users"))
+            let userss = JSON.parse(localStorage.getItem("users"))  // array a gayi
             const obj = {
                 "fullname": name,
                 "username": userName,
