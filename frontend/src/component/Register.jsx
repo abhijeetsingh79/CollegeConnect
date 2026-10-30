@@ -11,11 +11,15 @@ export default function Register(){
     const [errorPass, setErrorPass] = useState("false");
     const [errorUser, setErrorUser] = useState("false");
 
+    // Register check
+    const [check, setCheck] = useState("false")
+
     useEffect(()=>{
         // username
         let noCaptial = 0;
         let digits = 0;
         let firstNotdigit =true;
+        let countUserDigits =0;
 
         for(let i=0; i<userName.length; i++){
             let ch = userName[i];
@@ -28,22 +32,25 @@ export default function Register(){
                     firstNotdigit = false;
                 }
             }
+            countUserDigits++;
             
         }
 
         if(userName!=""){
             if(noCaptial > 0){
             setErrorUser("Cannot have Captial as Username")
-            } else if(digits==0){
+            } else if(digits===0){
                 setErrorUser("Username should have a Digit")
             } else if(!firstNotdigit){
                 setErrorUser("First letter cannot be a Digit")
+            } else if(countUserDigits<6){
+                setErrorUser("Username cannot be less than 6 chars")
             }
              else{
                 setErrorUser("false")
             }
         } else{
-            setErrorUser("false")
+            setErrorUser("cannot use")
         }
 
         
@@ -53,6 +60,7 @@ export default function Register(){
         let isSmall = false;
         let isDigit = false;
         let hasSpecialChar = false;
+        let countPassLetter = 0;
 
         for(let i=0; i<Password.length; i++){
             let ch = Password[i]
@@ -70,6 +78,7 @@ export default function Register(){
             if((asccii>=32 && asccii<=47)||(asccii>=58 && asccii<=64)){
                 hasSpecialChar = true;
             }
+            countPassLetter++;
         }
 
         if(Password!=""){
@@ -81,34 +90,67 @@ export default function Register(){
                 setErrorPass("Password should have a Digit")
             } else if(!hasSpecialChar){
                 setErrorPass("Password should have a Special Letter")
+            } else if(countPassLetter<8){
+                setErrorPass("Password should have atleast 8 chars")
             } else{
                 setErrorPass("false");
             }
         } else{
-            setErrorPass("false");
+            setErrorPass("cannot use");
         }
 
         //name
 
         let isValid = true;
+        let countName = 0;
         for(let i=0; i<name.length; i++){
             let asci = name.charCodeAt(i);
             if(!((asci>=65 && asci<=90) || (asci>=97 && asci<=122)|| asci==32)){
                 isValid = false;
             }
+            countName++;
         }
             if(name!=""){
                 if(!isValid){
                     setErrorName("Invalid Name use Small and Captial letters only");
+                } else if(countName<3){
+                    setErrorName("Name too Short")
                 } else{
                     setErrorName("false");
                 }
             } else{
-                setErrorName("false");
+                setErrorName("cannot use");
             }
 
      
     }, [userName, Password, name])
+
+    const checkRegister = async()=>{
+        if(errorName=="false" && errorPass=="false" && errorUser =="false"){
+            if(localStorage.getItem("users")==null){
+                localStorage.setItem("users",JSON.stringify([]))
+            }
+
+            let userss = JSON.parse(localStorage.getItem("users"))
+            const obj = {
+                "fullname": name,
+                "username": userName,
+                "password": Password
+            }
+            userss.push(obj);
+
+            localStorage.setItem("users", JSON.stringify(userss));
+
+            setCheck("Registered Sucessfully")
+            await new Promise((res)=>setTimeout(res, 2000));
+            setCheck("false")
+
+        } else{
+            setCheck("Register Failed")
+            await new Promise((res)=>setTimeout(res, 2000));
+            setCheck("false")
+        }
+    }
 
     return(
         <div className="register-contaner">
@@ -116,18 +158,25 @@ export default function Register(){
             <input type="text" placeholder="Enter Your FullName" className="register-input" value={name} onChange={(e)=>setName(e.target.value)}/> 
             <input type="text" placeholder="Enter Your username" className="register-input" value={userName} onChange={(e)=>setUserName(e.target.value)}/> 
             <input type="password" placeholder="Enter Your Password" className="register-input" value={Password} onChange={(e)=>setPassword(e.target.value)}/>
-            <button className="register-button">SignUp</button>
+            <button className="register-button" onClick={checkRegister}>SignUp</button>
 
             {
-                errorName!="false"?<div className="register-error">{errorName}</div>:null
+                errorName!="false" && errorName!="cannot use"?<div className="register-error">{errorName}</div>:null
             }
             {
-                errorUser!="false"?<div className="register-error">{errorUser}</div>:null
+                errorUser!="false" && errorUser!="cannot use"?<div className="register-error">{errorUser}</div>:null
             }
             {
-                errorPass!="false"?<div className="register-error">{errorPass}</div>:null
+                errorPass!="false" && errorPass!="cannot use"?<div className="register-error">{errorPass}</div>:null
+            }
+
+            {
+                check=="Registered Sucessfully"?<div className="register-sucessfull">{check}</div>:null
             }
             
+            {
+                check=="Register Failed"? <div className="register-unsucessfull">{check}</div>:null
+            }
             
         </div>
     )
