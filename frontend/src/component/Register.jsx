@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router";
 
 export default function Register(){
+    const navigate = useNavigate();
 
     const [userName, setUserName] = useState("");
     const [Password, setPassword] = useState("");
@@ -144,6 +146,7 @@ export default function Register(){
             setCheck("Registered Sucessfully")
             await new Promise((res)=>setTimeout(res, 2000));
             setCheck("false")
+            navigate("/login")
 
         } else{
             setCheck("Register Failed")

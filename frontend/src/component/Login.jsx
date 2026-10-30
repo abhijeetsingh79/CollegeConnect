@@ -11,7 +11,7 @@ export default function Login({setValue}){
     
     const handleLogin=async ()=>{
         if(localStorage.getItem("users")==null){
-            setShow("User Not Registered");
+            setShow("");
         } else{
             let userss = JSON.parse(localStorage.getItem("users"))
 
@@ -68,7 +68,7 @@ export default function Login({setValue}){
         <div className="login-container">
             <h2 className="login-text">Login</h2>
             <input type="text" placeholder="Enter Your Username " className="login-username" value={userName} onChange={(e)=> setUserName(e.target.value)}/>
-            <input type="text" placeholder="Enter Your Password" className="login-password" value={passowrd} onChange={(e)=> setPassword(e.target.value)}/>
+            <input type="password" placeholder="Enter Your Password" className="login-password" value={passowrd} onChange={(e)=> setPassword(e.target.value)}/>
             <button className="login-button" onClick={handleLogin}>Login</button>
 
             {
