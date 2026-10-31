@@ -344,3 +344,134 @@ gap: 15px;
 .login-toggle-register:hover {
     opacity: 0.8;
 }
+
+
+
+/* Home COmpoennet */
+.home-container {
+    position: relative;
+    min-height: calc(100vh - 85px);
+}
+
+.home-content-blur {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.home-content {
+    filter: none;
+}
+
+.home-login-first {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 300px;
+    padding: 25px;
+    text-align: center;
+
+    background-color: var(--surface-color);
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    z-index: 2;
+}
+
+.home-login-first h2 {
+    margin-top: 0;
+}
+
+.home-login-first p {
+    color: var(--secondary-text);
+    font-size: 14px;
+}
+
+.home-login-first button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    background-color: var(--primary-color);
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.home-login-first button:hover {
+    opacity: 0.9;
+}
+
+
+
+
+
+
+
+/* Student component -------------*/
+.student-container {
+    position: relative;
+    min-height: calc(100vh - 85px);
+}
+
+.student-content-blue {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.show-studnet-content {
+    filter: none;
+}
+
+.student-not-logged-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 300px;
+    padding: 25px;
+    text-align: center;
+
+    background-color: var(--surface-color);
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.student-not-logged-in h2 {
+    margin-top: 0;
+}
+
+.student-not-logged-in p {
+    color: var(--secondary-text);
+    font-size: 14px;
+}
+
+.student-not-logged-in button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    background-color: var(--primary-color);
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.student-not-logged-in button:hover {
+    opacity: 0.9;
+}

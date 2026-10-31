@@ -20,10 +20,9 @@ function App() {
         
           <Navbar value ={Logged} setValue={setLogged} />
 
-
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/student' element={<Student/>}/>
+          <Route path='/' element={<Home value = {Logged} />}/>
+          <Route path='/student' element={<Student value = {Logged} />}/>
           <Route path='/Events' element={<Events/>}/>
           <Route path='/Login' element={<Login setValue={setLogged}/>}/>
           <Route path='/Register' element={<Register/>}/>
