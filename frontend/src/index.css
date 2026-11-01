@@ -475,3 +475,292 @@ gap: 15px;
 .student-not-logged-in button:hover {
     opacity: 0.9;
 }
+
+
+/* Main Container */
+
+.student-container {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    padding: 35px 20px;
+    box-sizing: border-box;
+}
+
+.show-studnet-content,
+.student-content-blue {
+    max-width: 950px;
+    margin: auto;
+}
+
+/* Page Heading */
+
+.student-intro {
+    margin-bottom: 30px;
+}
+
+.student-header {
+    color: var(--text-color);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.student-intro span {
+    color: var(--secondary-text);
+    font-size: 15px;
+}
+
+/* Cards */
+
+.student-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.section-heading {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.student-card > span {
+    display: block;
+    color: var(--secondary-text);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+/* Personal and Academic Forms */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group h4 {
+    color: var(--text-color);
+    margin: 8px 0;
+}
+
+.form-group label {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+}
+
+.form-group input::placeholder {
+    color: var(--secondary-text);
+}
+
+.form-group select:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Subjects and Interests */
+
+.checkbox-section {
+    margin-top: 30px;
+}
+
+.checkbox-section h3 {
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.checkbox-section > span {
+    color: var(--secondary-text);
+    font-size: 14px;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkbox-item:hover {
+    background-color: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-item input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Save Button */
+
+.save-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.save-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    opacity: 0.9;
+}
+
+/* Login Overlay */
+
+.student-content-blue {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.student-not-logged-in {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(350px, calc(100% - 40px));
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10;
+}
+
+.student-not-logged-in h2 {
+    color: var(--text-color);
+}
+
+.student-not-logged-in p {
+    color: var(--secondary-text);
+    line-height: 1.5;
+}
+
+.student-not-logged-in button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 25px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 700px) {
+
+    .student-container {
+        padding: 25px 14px;
+    }
+
+    .student-card {
+        padding: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .student-header {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .save-section {
+        justify-content: stretch;
+    }
+
+    .save-button {
+        width: 100%;
+    }
+}
+.section-save {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -12px;
+    margin-bottom: 25px;
+}
+
+.section-save-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.section-save-button:hover {
+    opacity: 0.85;
+}
+
+.section-save-button:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 3px;
+}

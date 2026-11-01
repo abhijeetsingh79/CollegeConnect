@@ -121,21 +121,63 @@ const interests = [
     return(
         <div className="student-container">
             <div className={value==false? "student-content-blue": "show-studnet-content"}>
-                <div>
-                    <h2>Personal Information: </h2>
-                    <h4>Full Name : {value.fullname}</h4>
-                    <h4>User Name: {value.username}</h4>
-                    <input type="text" value={collegeEmail} placeholder="Enter Your College Email" onChange={(e)=> setCollegeEmail(e.target.value)}/>
-                    <input type="text" value={universityRollNo} placeholder="Enter University RollNo" onChange={(e)=> setUniversityRollNo(e.target.value)}/>
-                    <input type="text" value={collegeName} placeholder="Enter College Name" onChange={(e)=> setCollegeName(e.target.value)}/>
-                    {collegeEmail}<br/> {universityRollNo}<br/> {collegeName}
+
+                <div className="student-intro">
+                    <h2 className="student-header">Complete Your Student Profile</h2>
+                    <span>Fill in your details to personalise your CollegeConnect experience</span>
                 </div>
 
-                <div>
-                    <h2>Academic Information :</h2>
-                    <label htmlFor="course">Select your course</label>
-                    <select name="" id="" value={course} onChange={(e)=>{setCourse(e.target.value); setBranch("")}}>
-                        <option value="" disabled>Select Your Course</option>
+
+                <div className="student-card">
+                    <h2 className="section-heading">Personal Information: </h2>
+                    <span>Your basic details</span>
+
+                    <div className="form-grid">
+
+                        <div className="form-group">
+                    <h4>Full Name : {value?.fullname}</h4>
+                    </div>
+                    <div className="form-group">
+                    <h4>User Name: {value?.username}</h4>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="collegeEmailget">College Email</label>
+                    <input type="email" id="collegeEmailget" value={collegeEmail} placeholder="College Email" onChange={(e)=> setCollegeEmail(e.target.value)}/>
+                        
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="UniversityRollNumber">University Roll Number</label>
+                    <input type="text" value={universityRollNo} id="UniversityRollNumber" placeholder="University Roll Number" onChange={(e)=> setUniversityRollNo(e.target.value)}/>
+                        
+                    </div>
+
+                    <div className="form-group">
+                    <label htmlFor="collegeNameget">College Name</label>
+                    <input type="text" id="collegeNameget" value={collegeName} placeholder="College Name" onChange={(e)=> setCollegeName(e.target.value)}/>
+                    
+                    </div>
+                    {/* {collegeEmail}<br/> {universityRollNo}<br/> {collegeName}   */}
+                    
+
+                    </div>
+
+                </div>
+                <div className="section-save">
+                    <button className="section-save-button">Save</button>
+                </div>
+
+                <div className="student-card">
+                    <h2 className="section-heading">Academic Information :</h2>
+                    <span>Tell us about your current studies.</span>
+                    
+                    <div className="form-grid">
+                    
+                    <div className="form-group">
+                    <label htmlFor="course">Course</label>
+                    <select name="" id="course" value={course} onChange={(e)=>{setCourse(e.target.value); setBranch("")}}>
+                        <option value="" disabled={!course}>Choose your course</option>
                         <option value="Btech">Btech</option>
                         <option value="BCA">BCA</option>
                         <option value="BBA">BBA</option>
@@ -145,9 +187,12 @@ const interests = [
                         <option value="MCA">MCA</option>
                         <option value="MBA">MBA</option>
                     </select>
+                    </div>
 
-                    <select name="" id="" value={branchh} onChange={(e)=>setBranch(e.target.value)}>
-                    <option value="" disabled>Select Your Branch</option>
+                    <div className="form-group">
+                        <label htmlFor="branch">Branch / Specialisation</label>
+                    <select name="" id="branch" value={branchh} onChange={(e)=>setBranch(e.target.value)}>
+                    <option value="" disabled={!branchh}>Choose your branch</option>
                     {
                         course!=""?
                         branches[course].map((branch)=>(
@@ -156,9 +201,12 @@ const interests = [
                         :null
                     }
                     </select>
+                    </div>
 
-                    <select name="" id="" value={semester} onChange={(e)=>setSemester(e.target.value)}>
-                        <option value="" disabled>Select Your Semester</option>
+                    <div className="form-group">
+                        <label htmlFor="semester">Current Semester</label>
+                    <select name="" id="semester" value={semester} onChange={(e)=>setSemester(e.target.value)}>
+                        <option value="" disabled={!semester}>Choose your semester</option>
                         <option value="Semester 1">Semester 1</option>
                         <option value="Semester 2">Semester 2</option>
                         <option value="Semester 3">Semester 3</option>
@@ -168,34 +216,56 @@ const interests = [
                         <option value="Semester 7">Semester 7</option>
                         <option value="Semester 8">Semester 8</option>
                     </select>
+                    </div>
 
+                    </div>
                     
 
+                    <div className="checkbox-section">
+                        <h3>Your Subjects</h3>
+                        <span>Select the subjects you are currently studying</span>
+
+                        <div className="checkbox-grid">
                     {
                         subjects.map((sub)=>(
-                            <label htmlFor={`academic-${sub}`} key={sub}>
-                                <input type="checkbox" name="" id={`academic-${sub}`} value={sub} onChange={handleSubjects}/>{sub}
+                            <label htmlFor={`academic-${sub}`} key={sub} className="checkbox-item">
+                                <input type="checkbox" name="" id={`academic-${sub}`} value={sub} onChange={handleSubjects} checked={subject.includes(sub)}/>{sub}
                             </label>
                         ))
                     }
-                    <br /><br />
-                    {subject}
+                    {/* <br /><br />
+                    {subject} */}
+
+                    </div>
+
+                    </div>
+                    
                     
                 </div>
 
 
-                <div>
-                    <h2>Your Interest: </h2>
+                <div className="student-card">
+                    <h2>Your Interests </h2>
+                    <span>Select topics and activities you enjoy or want to explore</span>
+
+                    <div className="checkbox-grid">
                     {
                         interests.map((intr)=>(
-                            <label htmlFor={`interest-${intr}`} key={intr}>
-                            <input type="checkbox" value={intr} id={`interest-${intr}`} onChange={handleInterest} />{intr}
+                            <label htmlFor={`interest-${intr}`} key={intr} className="checkbox-item">
+                            <input type="checkbox" value={intr} id={`interest-${intr}`} onChange={handleInterest} checked={interest.includes(intr)}/>{intr}
                         </label>
                         ))
-                    } <br /><br />
-                    {interest}
+                    } 
+                    {/* <br /><br />
+                    {interest} */}
+                    </div>
 
                 </div>
+
+                <div className="save-section">
+                    <button className="save-button">Save Profile</button>
+                </div>
+
             </div>
 
             {
