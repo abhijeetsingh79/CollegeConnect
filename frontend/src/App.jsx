@@ -13,6 +13,10 @@ function App() {
   const [Logged, setLogged] = useState(JSON.parse(localStorage.getItem("isLoggedIn"))|| false);
   // use usestate outside to rerender all if value is changed every compont rerender
 
+  const [state, setState] = useState(false);
+  
+  
+
   return (
     <>
 
@@ -22,7 +26,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home value = {Logged} />}/>
-          <Route path='/student' element={<Student value = {Logged} />}/>
+          <Route path='/student' element={<Student value = {Logged} state={state} setState={setState}/>}/>
           <Route path='/Events' element={<Events/>}/>
           <Route path='/Login' element={<Login setValue={setLogged}/>}/>
           <Route path='/Register' element={<Register/>}/>

@@ -26,9 +26,10 @@ export default function Login({setValue}){
                     if(userss[i].username == userName){
                         if(userss[i].password== passowrd){
                             setShow("Login Sucessfull")
+                            const obj = userss[i]
 
                             // pehle local storage mein alag se put then useState wale fn mein set
-                            localStorage.setItem('isLoggedIn', JSON.stringify({"fullname":userss[i].fullname, "username":userss[i].username, "password":userss[i].password}))
+                            localStorage.setItem('isLoggedIn', JSON.stringify(obj))  // given full object who has logged in its full info
                             setValue(JSON.parse(localStorage.getItem("isLoggedIn")));
                             setPassword("")
                             setUserName("")

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-export default function Student({value}){
+export default function Student({value, state, setState}){
     const navigate = useNavigate();
 
     // naviagate to login after 6 secs
@@ -89,10 +89,11 @@ const interests = [
     "Research",
     "Startups"
 ];
+    const localObj = JSON.parse(localStorage.getItem('isLoggedIn'));
 
-    const [collegeEmail, setCollegeEmail] = useState("");
-    const [universityRollNo, setUniversityRollNo] = useState("")
-    const [collegeName, setCollegeName] = useState("")
+    const [collegeEmail, setCollegeEmail] = useState(localObj.collegeEmail || "");  // if undefined starts with ""
+    const [universityRollNo, setUniversityRollNo] = useState(localObj.collegeRollno || "");
+    const [collegeName, setCollegeName] = useState(localObj.collegeName|| "")
 
     const [course, setCourse] = useState("");
     const [branchh, setBranch] = useState("");
@@ -116,6 +117,109 @@ const interests = [
         } else{
             setInterest(interest.filter((i)=>i!=e.target.value))
         }
+    }
+
+
+    const [errorCollegeEmail, setErrorCollegeEmail] = useState("false");
+    const [errorUniversityRollNo, setErrorUniversityRollNo] = useState("false")
+    const [errorCollegeName, setErrorCollegeName] = useState("false")
+    // errors in personal info
+
+    const [errorSumittingPersonal, setErrorStubmittingPersonal] = useState("false");
+
+    useEffect(()=>{
+        // error handling in college email
+        let hasAt = 0;
+        let hasDot =0
+        for(let i=0; i<collegeEmail.length; i++){
+            if(collegeEmail[i]=='@'){
+                hasAt++;
+            }
+            if(collegeEmail[i]=='.'){
+                hasDot++;
+            }
+        }
+
+        if(collegeEmail!=""){
+            if(hasAt<1){
+                setErrorCollegeEmail("Email must have an '@'");
+            } else if(hasAt>1){
+                setErrorCollegeEmail("cannot have more than 1 '@'")
+            } else if(hasDot<1){
+                setErrorCollegeEmail("Email must include 'Dot'")
+            } else{
+                setErrorCollegeEmail("false")
+            }
+        } else{
+            setErrorCollegeEmail("false")
+        }
+
+        // error handling in roll no
+        let checkRoll = true
+        for(let i=0; i<universityRollNo.length; i++){
+            let ch = universityRollNo[i];
+            if(!(ch=='0'|| ch=='1'|| ch=='2'||ch=='3'|| ch=='4'|| ch=='5'|| ch=='6'||ch=='7'||ch=='8'||ch=='9')){
+                checkRoll = false
+            } 
+        }
+
+        if(!checkRoll){
+            setErrorUniversityRollNo("Roll no should have only Numbers")
+        } else{
+            setErrorUniversityRollNo("false")
+        }
+
+        // error handling in college name
+        let isValid = true;
+        for(let i=0; i<collegeName.length; i++){
+            const asci = collegeName.charCodeAt(i)
+            if(!((asci>=65 && asci<=90) || (asci>=97 && asci<=122)|| asci==32)){
+                isValid = false;
+            } 
+        }
+        if(!isValid){
+            setErrorCollegeName("Incorrect college name")
+        } else{
+            setErrorCollegeName("false")
+        }
+        
+        
+
+    }, [collegeEmail, universityRollNo, collegeName])
+
+
+    const handlePersonalDetails = async ()=>{
+
+        if(errorCollegeEmail=="false" && errorCollegeName=="false" && errorUniversityRollNo=="false"){
+            const obj = JSON.parse(localStorage.getItem('isLoggedIn'));
+            obj.collegeEmail = collegeEmail;
+            obj.collegeName = collegeName;
+            obj.collegeRollno = universityRollNo;
+
+            localStorage.setItem("isLoggedIn", JSON.stringify(obj));
+            setState(!state);
+            
+            const userss = JSON.parse(localStorage.getItem("users"));
+            for(let i=0; i<userss.length; i++){
+                if(userss[i].username==obj.username){
+                    if(userss[i].password==obj.password){
+                        userss[i] = obj;
+                    }
+                }
+            }
+            localStorage.setItem("users", JSON.stringify(userss))
+            setErrorStubmittingPersonal("Changes saved successfully")
+            
+            await new Promise((res)=>setTimeout(res, 2000));
+            setErrorStubmittingPersonal("false")
+        } else{
+            setErrorStubmittingPersonal("Please fill Correct details first")
+            await new Promise((res)=>setTimeout(res, 2000));
+            setErrorStubmittingPersonal("false")
+            
+
+        }
+        
     }
 
     return(
@@ -145,18 +249,28 @@ const interests = [
                         <label htmlFor="collegeEmailget">College Email</label>
                     <input type="email" id="collegeEmailget" value={collegeEmail} placeholder="College Email" onChange={(e)=> setCollegeEmail(e.target.value)}/>
                         
+                        {
+                        errorCollegeEmail!="false"? <div className="input-error">{errorCollegeEmail}</div>:null
+                        }
+
                     </div>
+                    
                     
                     <div className="form-group">
                         <label htmlFor="UniversityRollNumber">University Roll Number</label>
                     <input type="text" value={universityRollNo} id="UniversityRollNumber" placeholder="University Roll Number" onChange={(e)=> setUniversityRollNo(e.target.value)}/>
-                        
+                        {
+                        errorUniversityRollNo!="false"? <div className="input-error">{errorUniversityRollNo}</div>:null
+                        }
+
                     </div>
 
                     <div className="form-group">
                     <label htmlFor="collegeNameget">College Name</label>
                     <input type="text" id="collegeNameget" value={collegeName} placeholder="College Name" onChange={(e)=> setCollegeName(e.target.value)}/>
-                    
+                        {
+                            errorCollegeName!="false"? <div className="input-error">{errorCollegeName}</div>:null
+                        }
                     </div>
                     {/* {collegeEmail}<br/> {universityRollNo}<br/> {collegeName}   */}
                     
@@ -165,8 +279,11 @@ const interests = [
 
                 </div>
                 <div className="section-save">
-                    <button className="section-save-button">Save</button>
+                    <button className="section-save-button" onClick={handlePersonalDetails}>Save</button>
                 </div>
+                {
+                    errorSumittingPersonal=="false"?null: errorSumittingPersonal=="Changes saved successfully"?<div className="submit-success">{errorSumittingPersonal}</div>:errorSumittingPersonal=="Please fill Correct details first"?<div className="submit-error">{errorSumittingPersonal}</div>:null
+                }
 
                 <div className="student-card">
                     <h2 className="section-heading">Academic Information :</h2>
