@@ -89,7 +89,7 @@ const interests = [
     "Research",
     "Startups"
 ];
-    const localObj = JSON.parse(localStorage.getItem('isLoggedIn')||{});
+    const localObj = JSON.parse(localStorage.getItem('isLoggedIn')) || {};
 
     const [collegeEmail, setCollegeEmail] = useState(localObj.collegeEmail || "");  // if undefined starts with ""
     const [universityRollNo, setUniversityRollNo] = useState(localObj.collegeRollno || "");
