@@ -89,7 +89,7 @@ const interests = [
     "Research",
     "Startups"
 ];
-    const localObj = JSON.parse(localStorage.getItem('isLoggedIn'));
+    const localObj = JSON.parse(localStorage.getItem('isLoggedIn')||{});
 
     const [collegeEmail, setCollegeEmail] = useState(localObj.collegeEmail || "");  // if undefined starts with ""
     const [universityRollNo, setUniversityRollNo] = useState(localObj.collegeRollno || "");
@@ -199,7 +199,7 @@ const interests = [
             localStorage.setItem("isLoggedIn", JSON.stringify(obj));
             setState(!state);
             
-            const userss = JSON.parse(localStorage.getItem("users"));
+            const userss = JSON.parse(localStorage.getItem("users")|| []);
             for(let i=0; i<userss.length; i++){
                 if(userss[i].username==obj.username){
                     if(userss[i].password==obj.password){
