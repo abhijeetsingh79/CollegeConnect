@@ -837,3 +837,31 @@ gap: 15px;
     border-color: #166534;
     border-left-color: #22c55e;
 }
+
+.interest-save-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+}
+
+.interest-save-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.interest-save-button:hover {
+    opacity: 0.85;
+}
+
+.interest-save-button:active {
+    transform: scale(0.98);
+}

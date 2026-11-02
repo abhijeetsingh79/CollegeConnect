@@ -100,7 +100,7 @@ const interests = [
     const [semester, setSemester] = useState(localObj.semester || "")
     const [subject, setSubject] = useState(localObj.subject || "");
 
-    const [interest, setInterest] = useState([]);
+    const [interest, setInterest] = useState(localObj.interest || "");
 
     const handleSubjects=(e)=>{
         if(e.target.checked){
@@ -225,15 +225,15 @@ const interests = [
     const [errorInAcademic, setErrorAcademic] = useState("false");
     const handleAcademic = async ()=>{
         
-        if(course!="" && branchh!="" && semester!=""){
-            const obj = JSON.parse(localStorage.getItem("isLoggedIn"))
+        if(course!="" && branchh!="" && semester!="" && subject.length>0){
+            const obj = JSON.parse(localStorage.getItem("isLoggedIn")) || {}
             obj.course = course;
             obj.branch = branchh;
             obj.semester = semester;
             obj.subject = subject;
             localStorage.setItem("isLoggedIn", JSON.stringify(obj));
 
-            const userss = JSON.parse(localStorage.getItem("users"));
+            const userss = JSON.parse(localStorage.getItem("users")|| []);
 
             for(let i=0; i<userss.length; i++){
                 if(userss[i].username==obj.username){
@@ -255,10 +255,42 @@ const interests = [
             setErrorAcademic("false")
         }
         
+    }
+        const [errorInterest, setErrorInterest] = useState("false")
+
+        const handleInterestButton = async ()=>{
+            if(interest.length>0){
+                const obj = JSON.parse(localStorage.getItem("isLoggedIn")) || {};
+                obj.interest = interest;
+                localStorage.setItem("isLoggedIn", JSON.stringify(obj));
+
+                const userss = JSON.parse(localStorage.getItem("users")|| []);
+
+                for(let i=0; i<userss.length; i++){
+                    if(userss[i].username==obj.username){
+                        if(userss[i].password == obj.password){
+                            userss[i]= obj;
+                        }
+                    }
+                }
+
+                localStorage.setItem('users', JSON.stringify(userss));
+                setState(!state);
+
+                setErrorInterest("Changes saved successfully")
+                await new Promise((res)=>setTimeout(res, 2000))
+                setErrorInterest("false")
+            } else{
+                setErrorInterest("Please select proper values before submitting")
+                await new Promise((res)=>setTimeout(res, 2000))
+                setErrorInterest("false")
+            }
+            
+        }
 
         
         
-    }
+    
 
     return(
         <div className="student-container">
@@ -422,11 +454,18 @@ const interests = [
                     {interest} */}
                     </div>
 
-                </div>
+                    <div className="interest-save-container">
+                        <button className="interest-save-button" onClick={handleInterestButton}>Save</button>
+                    </div>
 
-                <div className="save-section">
-                    <button className="save-button">Save Profile</button>
+                    
                 </div>
+                    {
+                        errorInterest=="false"?null: errorInterest=="Changes saved successfully"?<div className="submit-success">{errorInterest}</div>:<div className="submit-error">{errorInterest}</div>
+                    }
+
+
+                
 
             </div>
 
