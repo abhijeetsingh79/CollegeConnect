@@ -95,10 +95,10 @@ const interests = [
     const [universityRollNo, setUniversityRollNo] = useState(localObj.collegeRollno || "");
     const [collegeName, setCollegeName] = useState(localObj.collegeName|| "")
 
-    const [course, setCourse] = useState("");
-    const [branchh, setBranch] = useState("");
-    const [semester, setSemester] = useState("")
-    const [subject, setSubject] = useState([]);
+    const [course, setCourse] = useState(localObj.course || "");
+    const [branchh, setBranch] = useState(localObj.branch || "");
+    const [semester, setSemester] = useState(localObj.semester || "")
+    const [subject, setSubject] = useState(localObj.subject || "");
 
     const [interest, setInterest] = useState([]);
 
@@ -222,6 +222,44 @@ const interests = [
         
     }
 
+    const [errorInAcademic, setErrorAcademic] = useState("false");
+    const handleAcademic = async ()=>{
+        
+        if(course!="" && branchh!="" && semester!=""){
+            const obj = JSON.parse(localStorage.getItem("isLoggedIn"))
+            obj.course = course;
+            obj.branch = branchh;
+            obj.semester = semester;
+            obj.subject = subject;
+            localStorage.setItem("isLoggedIn", JSON.stringify(obj));
+
+            const userss = JSON.parse(localStorage.getItem("users"));
+
+            for(let i=0; i<userss.length; i++){
+                if(userss[i].username==obj.username){
+                    if(userss[i].password == obj.password){
+                        userss[i]= obj;
+                    }
+                }
+            }
+
+            localStorage.setItem('users', JSON.stringify(userss));
+            setState(!state);
+
+            setErrorAcademic("Changes saved successfully")
+            await new Promise((res)=>setTimeout(res, 2000))
+            setErrorAcademic("false")
+        } else{
+            setErrorAcademic("Please select proper values before submitting")
+            await new Promise((res)=>setTimeout(res, 2000))
+            setErrorAcademic("false")
+        }
+        
+
+        
+        
+    }
+
     return(
         <div className="student-container">
             <div className={value==false? "student-content-blue": "show-studnet-content"}>
@@ -282,7 +320,7 @@ const interests = [
                     <button className="section-save-button" onClick={handlePersonalDetails}>Save</button>
                 </div>
                 {
-                    errorSumittingPersonal=="false"?null: errorSumittingPersonal=="Changes saved successfully"?<div className="submit-success">{errorSumittingPersonal}</div>:errorSumittingPersonal=="Please fill Correct details first"?<div className="submit-error">{errorSumittingPersonal}</div>:null
+                    errorSumittingPersonal=="false"?null: errorSumittingPersonal=="Changes saved successfully"?<div className="submit-success">{errorSumittingPersonal}</div>:<div className="submit-error">{errorSumittingPersonal}</div>
                 }
 
                 <div className="student-card">
@@ -346,7 +384,7 @@ const interests = [
                     {
                         subjects.map((sub)=>(
                             <label htmlFor={`academic-${sub}`} key={sub} className="checkbox-item">
-                                <input type="checkbox" name="" id={`academic-${sub}`} value={sub} onChange={handleSubjects} checked={subject.includes(sub)}/>{sub}
+                                <input type="checkbox" name="" id={`academic-${sub}`} value={sub} onChange={handleSubjects} checked={subject.includes(sub)}/>{sub}  {/* subject.includes sub check if subject array has sub then keep it checked*/}
                             </label>
                         ))
                     }
@@ -359,6 +397,13 @@ const interests = [
                     
                     
                 </div>
+                <div className="section-save">
+                    <button className="section-save-button" onClick={handleAcademic}>Save</button>
+                </div>
+                {
+                    errorInAcademic=="false"?null: errorInAcademic=="Changes saved successfully"?<div className="submit-success">{errorInAcademic}</div>:<div className="submit-error">{errorInAcademic}</div>
+                }
+
 
 
                 <div className="student-card">
