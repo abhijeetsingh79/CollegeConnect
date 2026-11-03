@@ -16,8 +16,10 @@ export default function Home({value, state, setState}){
     // }
 
     const [data, setData] = useState([]);
-    const obj = JSON.parse(localStorage.getItem("isLoggedIn")||[])
+    const obj = JSON.parse(localStorage.getItem("isLoggedIn")||{})
     const customerInterests = obj.interest || [];
+
+    const [wait, setWait] = useState("false");
 
     useEffect(()=>{
         try{
@@ -36,7 +38,9 @@ export default function Home({value, state, setState}){
             setData(result[0].data)
             
             }
+            setWait("true")
             getData();
+            setWait("false")
         } catch(error){
             console.log(error);
         }
@@ -85,6 +89,13 @@ export default function Home({value, state, setState}){
                     <h2>Login First</h2>
                     <p>Please login to access CollegeConnect.</p>
                     <button onClick={() => navigate("/Login")}>Login</button>
+                </div> : null
+            }
+
+            {
+                wait == "true" ?
+                <div className="fetching-api">
+                    Fetching...
                 </div> : null
             }
 
