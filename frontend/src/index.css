@@ -865,3 +865,400 @@ gap: 15px;
 .interest-save-button:active {
     transform: scale(0.98);
 }
+
+
+
+/* Cards-- Student Card */
+
+
+/* STUDENT CARDS CONTAINER */
+
+.student-cards-display {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    gap: 20px;
+
+    padding: 20px 25px;
+}
+
+
+/* DESKTOP / LAPTOP */
+
+.student-cards-display > .event-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    max-width: calc((100% - 40px) / 3);
+}
+
+
+/* TABLET */
+
+@media (max-width: 1050px) {
+
+    .student-cards-display {
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .student-cards-display > .event-card {
+        flex: 0 0 calc((100% - 18px) / 2);
+        max-width: calc((100% - 18px) / 2);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .student-cards-display {
+        gap: 16px;
+        padding: 14px;
+    }
+
+    .student-cards-display > .event-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+}
+
+
+/*  se */
+
+/* =================================
+   MAIN CARD
+================================= */
+
+/* =================================
+   MAIN CARD
+================================= */
+
+.event-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    padding: 13px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+}
+
+.event-badges {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.event-type,
+.event-mode,
+.featured-badge {
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.event-type {
+    background: var(--bg-color);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.event-mode {
+    background: var(--bg-color);
+    color: var(--secondary-text);
+}
+
+.featured-badge {
+    background: var(--bg-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    white-space: nowrap;
+}
+
+
+/* =================================
+   MAIN CONTENT
+================================= */
+
+.event-main {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.event-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-color);
+}
+
+.event-description {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--secondary-text);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.event-organizer {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--secondary-text);
+}
+
+.event-organizer strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+
+/* =================================
+   EVENT DETAILS
+================================= */
+
+.event-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 9px 10px;
+
+    padding: 10px 0;
+
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.detail-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--secondary-text);
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.detail-value {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-color);
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =================================
+   FOOTER
+================================= */
+
+.event-card-footer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 10px;
+    align-items: center;
+}
+
+.event-seats,
+.event-deadline {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.event-seats p,
+.event-deadline p {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+
+/* =================================
+   REGISTER BUTTON
+================================= */
+
+.event-register-btn {
+    grid-column: 1 / -1;
+
+    width: 100%;
+    padding: 8px 10px;
+
+    background: var(--primary-color);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: opacity 0.2s ease;
+}
+
+.event-register-btn:hover {
+    opacity: 0.85;
+}
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 1050px) {
+
+    .event-card {
+        padding: 12px;
+    }
+
+    .event-title {
+        font-size: 15px;
+    }
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 650px) {
+
+    .event-card {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .event-title {
+        font-size: 17px;
+    }
+
+    .event-description {
+        font-size: 12px;
+    }
+
+    .detail-value {
+        font-size: 12px;
+    }
+
+}
+
+.student-cards-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    padding: 18px 20px;
+    box-sizing: border-box;
+}
+
+/* Desktop: 4 cards per row */
+.student-cards-display > .event-card {
+    flex: 0 0 calc((100% - 48px) / 4);
+    max-width: calc((100% - 48px) / 4);
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width: 1050px) {
+    .student-cards-display > .event-card {
+        flex-basis: calc((100% - 16px) / 2);
+        max-width: calc((100% - 16px) / 2);
+    }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 650px) {
+    .student-cards-display {
+        padding: 12px;
+        gap: 14px;
+    }
+
+    .student-cards-display > .event-card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
+
+/* Event title */
+.event-title {
+    font-size: 18px;  /* 17px → 18px */
+}
+
+/* Description */
+.event-description {
+    font-size: 13.5px; /* 13px → 13.5px */
+    line-height: 1.5;
+}
+
+/* Organizer */
+.event-organizer {
+    font-size: 13px;  /* 12px → 13px */
+}
+
+/* Detail labels */
+.detail-label {
+    font-size: 10px;
+}
+
+/* Date, time, location, duration */
+.detail-value {
+    font-size: 12.5px; /* 12px → 12.5px */
+}
+
+/* Available seats and deadline */
+.event-seats p,
+.event-deadline p {
+    font-size: 12.5px;
+}
+
+/* Register button */
+.event-register-btn {
+    font-size: 13px;  /* 12px → 13px */
+    padding: 9px 10px;
+}

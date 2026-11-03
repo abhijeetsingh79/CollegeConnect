@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import StudentCard from "./Cards/StudentCard";
 
 export default function Home({value, state, setState}){
     const navigate = useNavigate();
@@ -15,9 +16,12 @@ export default function Home({value, state, setState}){
     // }
 
     const [data, setData] = useState([]);
+    const obj = JSON.parse(localStorage.getItem("isLoggedIn")||[])
+    const customerInterests = obj.interest || [];
 
     useEffect(()=>{
-        const getData = async ()=>{
+        try{
+            const getData = async ()=>{
             const response = await fetch("https://cnbfzzhqkccjtkhefjhu.supabase.co/rest/v1/events?select=data",
                 {
                     method: "GET",
@@ -31,18 +35,46 @@ export default function Home({value, state, setState}){
             // console.log(result);
             setData(result[0].data)
             
+            }
+            getData();
+        } catch(error){
+            console.log(error);
         }
-        getData();
+        
 
     }, [state])
-    console.log(data);
+    
+    // console.log(data);
+
     
 
     return(
         <div className="home-container">
 
             <div className={value == false ? "home-content-blur" : "home-content"} >
-                <h2>Home Content</h2>
+
+                <div className="student-cards-display">
+                
+                {
+                    data.map((item)=>{
+                        let toUse = false
+                        if(customerInterests.length>2){
+                            for(let i=0; i<customerInterests.length; i++){
+                                if(item.interests.includes(customerInterests[i])){
+                                    toUse = true;
+                                }
+                            }
+
+                            if(toUse){
+                                return <StudentCard obj = {item}/>
+                            }
+
+                        } else{
+                            return <StudentCard obj = {item}/>
+                        }
+                    })
+                }
+                </div>
 
                 
             </div>
