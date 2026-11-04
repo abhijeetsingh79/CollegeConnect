@@ -16,7 +16,7 @@ export default function Home({value, state, setState}){
     // }
 
     const [data, setData] = useState([]);
-    const obj = JSON.parse(localStorage.getItem("isLoggedIn")||{})
+    const obj = JSON.parse(localStorage.getItem("isLoggedIn")) ||{}
     const customerInterests = obj.interest || [];
 
     const [wait, setWait] = useState("false");
