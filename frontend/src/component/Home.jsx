@@ -50,7 +50,15 @@ export default function Home({value, state, setState}){
     
     // console.log(data);
 
-    
+
+    // to prvenet page to be fixed if not logged in
+    useEffect(() => {
+    document.body.style.overflow = value ? "auto" : "hidden";
+
+    return () => {
+        document.body.style.overflow = "auto";
+    };
+}, [value]);
 
     return(
         <div className="home-container">
@@ -70,11 +78,11 @@ export default function Home({value, state, setState}){
                             }
 
                             if(toUse){
-                                return <StudentCard obj = {item}/>
+                                return <StudentCard key={item.id} obj = {item}/>
                             }
 
                         } else{
-                            return <StudentCard obj = {item}/>
+                            return <StudentCard key={item.id} obj = {item}/>
                         }
                     })
                 }

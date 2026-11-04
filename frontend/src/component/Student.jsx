@@ -289,8 +289,14 @@ const interests = [
         }
 
         
-        
-    
+       // if not logged in page fixed 
+    useEffect(() => {
+    document.body.style.overflow = value ? "auto" : "hidden";
+
+    return () => {
+        document.body.style.overflow = "auto";
+    };
+}, [value]);
 
     return(
         <div className="student-container">
