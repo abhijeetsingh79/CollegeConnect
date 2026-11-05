@@ -19,9 +19,9 @@ export default function Home({value, state, setState}){
     const obj = JSON.parse(localStorage.getItem("isLoggedIn")) ||{}
     const customerInterests = obj.interest || [];
 
-    const [wait, setWait] = useState("false");
-
+    const [loading, setLoading] = useState(false);
     useEffect(()=>{
+        setLoading(true);
         try{
             const getData = async ()=>{
             const response = await fetch("https://cnbfzzhqkccjtkhefjhu.supabase.co/rest/v1/events?select=data",
@@ -35,12 +35,13 @@ export default function Home({value, state, setState}){
 
             const result = await response.json();
             // console.log(result);
+
             setData(result[0].data)
-            
+            setLoading(false)
             }
-            setWait("true")
+            
             getData();
-            setWait("false")
+            
         } catch(error){
             console.log(error);
         }
@@ -101,11 +102,30 @@ export default function Home({value, state, setState}){
             }
 
             {
-                wait == "true" ?
-                <div className="fetching-api">
-                    Fetching...
-                </div> : null
-            }
+            loading?
+            <div className="cc-events-loading-wrapper">
+            <div className="cc-events-loading-card">
+
+                <img
+                    src="https://i.giphy.com/emySgWo0iBKwqni1wR.webp"
+                    alt="Loading events"
+                    className="cc-events-loading-gif"
+                />
+
+                <h2>Discovering Events</h2>
+
+                <p>
+                    Finding exciting things happening on your campus...
+                </p>
+
+                <div className="cc-events-loading-bar">
+                    <span></span>
+                </div>
+
+            </div>
+            </div>
+            :null
+        }
 
             
         </div>
