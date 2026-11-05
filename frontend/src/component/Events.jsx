@@ -21,7 +21,7 @@ export default function Events({state, setState}){
 
             const result = await response.json();
             setData(result[1].data);
-            // setLoading(false)
+            setLoading(false)
 
             } catch (error) {
                 console.log(error);

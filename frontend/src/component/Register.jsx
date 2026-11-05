@@ -144,7 +144,7 @@ export default function Register(){
             localStorage.setItem("users", JSON.stringify(userss));
 
             setCheck("Registered Sucessfully")
-            await new Promise((res)=>setTimeout(res, 2000));
+            await new Promise((res)=>setTimeout(res, 1300));
             setCheck("false")
             navigate("/login")
 
