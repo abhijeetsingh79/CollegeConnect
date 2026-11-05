@@ -18,15 +18,15 @@ const StudentCard = ({obj})=>{
 
 
                 <div className="event-main">
-                    <h2 className="event-title">{obj.title}</h2>
+                    <span className="event-title">{obj.title}</span>
 
-                    <p className="event-description">
+                    <span className="event-description">
                         {obj.description}
-                    </p>
+                    </span>
 
-                    <p className="event-organizer">
+                    <span className="event-organizer">
                         Organized by <strong>{obj.organizer}</strong>
-                    </p>
+                    </span>
                 </div>
 
 

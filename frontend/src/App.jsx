@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home value = {Logged} state={state} setState={setState}/>}/>
           <Route path='/student' element={<Student value = {Logged} state={state} setState={setState}/>}/>
-          <Route path='/Events' element={<Events/>}/>
+          <Route path='/Events' element={<Events state={state} setState={setState}/>}/>
           <Route path='/Login' element={<Login setValue={setLogged}/>}/>
           <Route path='/Register' element={<Register/>}/>
 

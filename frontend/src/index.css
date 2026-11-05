@@ -1288,6 +1288,8 @@ color: var(--text-color);
     font-weight: 700;
     line-height: 1.35;
     color: var(--text-color);
+    margin-bottom: 5px;
+
 }
 
 .event-description {
@@ -1299,6 +1301,7 @@ color: var(--text-color);
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: 3px;
 }
 
 .event-organizer {
@@ -1435,7 +1438,7 @@ color: var(--text-color);
 
     .event-card {
         padding: 14px;
-        gap: 10px;
+        gap: 15px;
     }
 
     .event-title {
@@ -1448,6 +1451,15 @@ color: var(--text-color);
 
     .detail-value {
         font-size: 12px;
+    }
+    .event-title{
+        margin-bottom: 9px;
+    }
+    .event-description{
+        margin-bottom: 5px;
+    }
+    .event-organizer{
+        margin-bottom: 5px;
     }
 
 }
@@ -1644,5 +1656,195 @@ color: var(--text-color);
     .fetching-api {
         font-size: 14px;
         padding: 12px 20px;
+    }
+}
+
+
+
+/* Events Componnent */
+
+/* ============================= */
+/* EVENTS GRID */
+/* ============================= */
+
+.cc-events-grid {
+    width: 100%;
+    max-width: 1500px;
+    margin: 25px auto;
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================= */
+/* EVENT CARD */
+/* ============================= */
+
+.cc-event-card {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cc-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================= */
+/* IMAGE */
+/* ============================= */
+
+.cc-event-image {
+    width: 100%;
+    height: 155px;
+    overflow: hidden;
+}
+
+.cc-event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+.cc-event-card:hover .cc-event-image img {
+    transform: scale(1.06);
+}
+
+
+/* ============================= */
+/* CONTENT */
+/* ============================= */
+
+.cc-event-content {
+    padding: 13px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    flex: 1;
+}
+
+
+/* ============================= */
+/* TITLE */
+/* ============================= */
+
+.cc-event-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+
+    margin: 0;
+    color: var(--text-color);
+}
+
+
+/* ============================= */
+/* DETAILS */
+/* ============================= */
+
+.cc-event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cc-event-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+
+    color: var(--secondary-text);
+    font-size: 13px;
+}
+
+.cc-event-detail p {
+    margin: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+/* ============================= */
+/* ORGANIZER */
+/* ============================= */
+
+.cc-event-organizer {
+    border-top: 1px solid var(--border-color);
+
+    padding-top: 11px;
+    margin-top: auto;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--primary-color);
+}
+
+
+/* ============================= */
+/* SMALL LAPTOPS */
+/* ============================= */
+
+@media screen and (max-width: 1100px) {
+    .cc-events-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ============================= */
+/* TABLETS */
+/* ============================= */
+
+@media screen and (max-width: 800px) {
+    .cc-events-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media screen and (max-width: 550px) {
+    .cc-events-grid {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 16px;
+        margin: 15px auto;
+    }
+
+    .cc-event-image {
+        height: 190px;
+    }
+
+    .cc-event-title {
+        font-size: 18px;
+    }
+
+    .cc-event-content {
+        padding: 15px;
     }
 }

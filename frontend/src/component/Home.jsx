@@ -46,7 +46,7 @@ export default function Home({value, state, setState}){
         }
         
 
-    }, [state])
+    }, []);
     
     // console.log(data);
 
