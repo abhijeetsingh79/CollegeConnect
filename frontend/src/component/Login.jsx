@@ -37,7 +37,7 @@ export default function Login({setValue}){
                             checkUser = true;
                             setUserNotExist(false);
                             
-                            await new Promise((res)=>setTimeout(res, 2000))
+                            await new Promise((res)=>setTimeout(res, 1300))
                             navigate("/student")
                         }else{
                             setShow("Incorrect Password")

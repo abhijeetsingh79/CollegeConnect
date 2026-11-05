@@ -278,7 +278,8 @@ const interests = [
                 setState(!state);
 
                 setErrorInterest("Changes saved successfully")
-                await new Promise((res)=>setTimeout(res, 2000))
+                await new Promise((res)=>setTimeout(res, 1200))
+                navigate('/')
                 setErrorInterest("false")
             } else{
                 setErrorInterest("Please select proper values before submitting")
@@ -469,7 +470,6 @@ const interests = [
                     {
                         errorInterest=="false"?null: errorInterest=="Changes saved successfully"?<div className="submit-success">{errorInterest}</div>:<div className="submit-error">{errorInterest}</div>
                     }
-
 
                 
 
